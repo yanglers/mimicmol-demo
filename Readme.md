@@ -4,6 +4,13 @@ This is a cleaned and simplified version of the pipeline that would be used in M
 
 To use this code, you would need to input an OpenAI API key (or similar). I left mine out for privacy reasons.
 
+Below is the result of one of the unit tests we conducted (for CBL-2) when evaluating this pipeline, of which there is more detail in the written application. I've also added both starting datasets, which were downloaded from ChemBL. 
+
+
+|---------|--------|
+| Number of Generated Molecules | 10000 | 
+| Number of Generated Molecules, filtered for structural feasibility | 9002  | 
+
 | Column 1 | Column 2 | Column 3 |
 |----------|----------|----------|
 | Data 1   | Data 2   | Data 3   |
