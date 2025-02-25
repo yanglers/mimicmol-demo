@@ -248,7 +248,6 @@ def generate_similar_molecules_gpt(
     molecules_per_ref = n_to_generate // len(top_smiles_list)
     generated_smiles = []
 
-    # PSEUDO-CODE for GPT calls:
     # ------------------------------------------------------------------------
     # import openai
     # openai.api_key = openai_api_key
@@ -279,6 +278,8 @@ def generate_similar_molecules_gpt(
     #     # generated_smiles.extend(new_smiles_list)
     #
     # ------------------------------------------------------------------------
+    
+    return generated_smiles
 
 def filter_valid_smiles(
     smiles_df, 
