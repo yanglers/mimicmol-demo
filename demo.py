@@ -378,7 +378,6 @@ def predict_bioactivity_for_generated(model, sim_generated_df):
 
 
 def main():
-    # 1. Compute the similarity matrix for the original assay
     sim_df = compute_similarity_matrix(
         assay_csv="CBL-2.csv",
         smiles_col="Smiles",
@@ -386,7 +385,6 @@ def main():
         output_csv="similarity_matrix.csv"
     )
 
-    # 2. Load the assay data & target (optional -log transform)
     assay_df, target = load_assay_data(
         assay_path="CBL-2.csv",
         sep=";",
@@ -394,8 +392,6 @@ def main():
         transform=True
     )
 
-    # 3. Train Random Forest model on the entire similarity matrix
-    #    We'll assign numeric columns for scikit-learn
     original_smiles = sim_df.columns
     sim_df_numeric = sim_df.reset_index(drop=True)
     sim_df_numeric.columns = range(len(sim_df_numeric.columns))
@@ -408,7 +404,6 @@ def main():
         n_estimators=100
     )
 
-    # 4. Identify top 20 most important molecules
     top_20_df = get_top_important_molecules(
         assay_df=assay_df, 
         sim_df=sim_df, 
@@ -419,19 +414,16 @@ def main():
     print("\nTop 20 Important Molecules:")
     print(top_20_df[['Smiles', 'Importance']])
 
-    # 5. Generate 10,000 new molecules via GPT using a refined prompt
     generated_df = generate_similar_molecules_gpt(
         top_molecules_df=top_20_df, 
         n_to_generate=10000,
-        openai_api_key=None  # or your actual GPT key
+        openai_api_key=None # insert API key
     )
     print(f"\nGenerated {len(generated_df)} molecules from GPT call.")
 
-    # 6. Filter invalid SMILES
     valid_generated_df = filter_valid_smiles(generated_df, smiles_col='Generated_SMILES')
     print(f"After filtering, we have {len(valid_generated_df)} valid generated molecules.")
 
-    # 7. Compute similarity for generated molecules against the original assay set
     generated_sim_df = compute_similarity_generated(
         generated_df=valid_generated_df,
         original_df=assay_df,
@@ -439,28 +431,23 @@ def main():
         original_smiles_col='Smiles'
     )
 
-    # Match columns to training order
     generated_sim_df_ordered = generated_sim_df[original_smiles]
     generated_sim_df_numeric = generated_sim_df_ordered.reset_index(drop=True)
     generated_sim_df_numeric.columns = range(len(generated_sim_df_numeric.columns))
 
-    # 8. Predict bioactivity for generated molecules
     predictions = predict_bioactivity_for_generated(
         model=model,
         sim_generated_df=generated_sim_df_numeric
     )
 
-    # 9. Combine predictions with generated SMILES
     candidate_molecules_df = valid_generated_df.copy()
     candidate_molecules_df['Predicted_Bioactivity'] = predictions
 
-    # (Optional) Sort by predicted activity
     candidate_molecules_df.sort_values(by='Predicted_Bioactivity', ascending=False, inplace=True)
 
     print("\nSample of generated candidate molecules with predicted bioactivity:")
     print(candidate_molecules_df.head(10))
 
-    # 10. Save final candidate molecules DataFrame
     candidate_molecules_df.to_csv("candidate_molecules_with_predictions.csv", index=False)
 
 
