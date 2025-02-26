@@ -6,7 +6,7 @@ To use this code, you would need to input an OpenAI API key (or similar). I left
 
 Below is the result of one of the unit tests we conducted (for CBL-2) when evaluating this pipeline, of which there is more detail in the written application. I've also added both starting datasets, which were downloaded from ChemBL. 
 
-For clarity, Assay 1 refers to "CBL-2.csv", and Assay 2 refers to "CBL-2-B"
+For clarity, Assay 1 refers to "CBL-2.csv", and Assay 2 refers to "CBL-2-B.csv"
 
 | Header   | Value  |
 |----------|--------|
@@ -21,10 +21,10 @@ For clarity, Assay 1 refers to "CBL-2.csv", and Assay 2 refers to "CBL-2-B"
 |----------|----------|----------|
 | Average -log(Bioactivity) for Assay 1  | -6.5004   |    |
 | Average -log(Bioactivity) for Generated Molecules (as predicted by Model 1)  | -6.7112   | 1.46 * 10^-35 |
-| Average -log(Bioactivity) for Assay 2   |    |  |
-| Average -log(Bioactivity) for Generated Molecules (as predicted by Model 2)   |    |    |
-| Average -log(Bioactivity) for Assay 1 (as predicted by Model 2)   |   |    |
-| Average -log(Bioactivity) for Generated Molecules (as predicted by Model 2)  |    |    |
+| Average -log(Bioactivity) for Assay 2   | -5.4197    |  |
+| Average -log(Bioactivity) for Generated Molecules (as predicted by Model 2)   | -6.1315 |    |
+| Average -log(Bioactivity) for Assay 1 (as predicted by Model 2)   | -5.941  |    |
+| Average -log(Bioactivity) for Generated Molecules (as predicted by Model 2)  |  -6.1315  |    |
 
 
 Let me know if you have any questions! 
