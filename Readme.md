@@ -4,7 +4,7 @@ This is a cleaned and simplified version of the pipeline that would be used in M
 
 To use this code, you would need to input an OpenAI API key (or similar). I left mine out for privacy reasons.
 
-Below is the result of one of the unit tests we conducted (for CBL-2) when evaluating this pipeline, of which there is more detail in the written application. I've also added both starting datasets, which were downloaded from ChemBL, as well as our generated molecular candidates ([here](generated_smiles.csv)). 
+Below is the result of one of the unit tests we conducted (for CBL-2) when evaluating this pipeline, of which there is more detail in the written application. I've also added both starting datasets [here](CBL-2.csv) and [here](CBL-2-B.csv), which were downloaded from ChemBL, as well as our generated molecular candidates ([here](generated_smiles.csv)). 
 
 For clarity, Assay 1 refers to "CBL-2.csv", and Assay 2 refers to "CBL-2-B.csv"
 
